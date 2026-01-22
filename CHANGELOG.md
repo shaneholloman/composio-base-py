@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.27.0 (2026-01-22)
+
+Full Changelog: [v1.26.0...v1.27.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.26.0...v1.27.0)
+
+### Features
+
+* **api:** api update ([5a027a3](https://github.com/ComposioHQ/composio-base-py/commit/5a027a32cf1ffecf457ac429f8e0efc6f4798750))
+* **api:** api update ([8ab0a45](https://github.com/ComposioHQ/composio-base-py/commit/8ab0a453332f4a5d9c6b37a8855e4c6acb361f23))
+* **api:** api update ([2cf9aa6](https://github.com/ComposioHQ/composio-base-py/commit/2cf9aa6c915e082157fb816d6f6b5129091b1fac))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([808f2d4](https://github.com/ComposioHQ/composio-base-py/commit/808f2d4f955497a751e2f34686359d0398e138e9))
+
 ## 1.26.0 (2026-01-14)
 
 Full Changelog: [v1.25.0...v1.26.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.25.0...v1.26.0)
