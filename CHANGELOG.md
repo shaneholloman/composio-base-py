@@ -1,5 +1,51 @@
 # Changelog
 
+## 1.28.0 (2026-03-09)
+
+Full Changelog: [v1.27.0...v1.28.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.27.0...v1.28.0)
+
+### Features
+
+* **api:** Add cli realtime endpoints ([cbb7dff](https://github.com/ComposioHQ/composio-base-py/commit/cbb7dff7beb18294c6ad9e69b71333c5e5133b23))
+* **api:** Add session files support ([e9c504e](https://github.com/ComposioHQ/composio-base-py/commit/e9c504eb00fa3d4a36a3d3ada253181ade66a778))
+* **api:** api update ([b60ade4](https://github.com/ComposioHQ/composio-base-py/commit/b60ade49e082dd89de6d83bb38b1de68e1f526e1))
+* **api:** api update ([5a16b25](https://github.com/ComposioHQ/composio-base-py/commit/5a16b25554fc5c755e8f74c8d4b44834869037f8))
+* **api:** api update ([cfffcfd](https://github.com/ComposioHQ/composio-base-py/commit/cfffcfd18b3a0f869bbf4ef9d3cc035d6d57a07e))
+* **api:** api update ([f672b06](https://github.com/ComposioHQ/composio-base-py/commit/f672b06e76d16663771cfa6a6f5d02ed11da8a7a))
+* **api:** api update ([7131d88](https://github.com/ComposioHQ/composio-base-py/commit/7131d8895d6ad25a6f697f0d72ce900c2129bdf9))
+* **api:** api update ([d032efc](https://github.com/ComposioHQ/composio-base-py/commit/d032efc7b94ae255fb4af0834a0a8a2bd36b151f))
+* **api:** api update ([39b01b5](https://github.com/ComposioHQ/composio-base-py/commit/39b01b56b2c2cf132d6a4eb87c69e731e2e958e1))
+* **api:** api update ([4f1823d](https://github.com/ComposioHQ/composio-base-py/commit/4f1823d933c2a76ce1bb7dbce28b5dd5a5256f5e))
+* **api:** api update ([41f97b5](https://github.com/ComposioHQ/composio-base-py/commit/41f97b55e35098c59ea5d995c35550f65d88a3fe))
+* **api:** api update ([4c6ecfe](https://github.com/ComposioHQ/composio-base-py/commit/4c6ecfe21cac7ffcbf220e670372db98e845b2f1))
+* **api:** api update ([73032f8](https://github.com/ComposioHQ/composio-base-py/commit/73032f85274ea631f416a118fec3b207f2d2c063))
+* **api:** api update ([af48bb2](https://github.com/ComposioHQ/composio-base-py/commit/af48bb2f09a2677b0e69bdecc37f6e73595d5d9c))
+* **api:** expose individual trigger log ([83bcc71](https://github.com/ComposioHQ/composio-base-py/commit/83bcc71042e8a2382ee2fbad3116a15e020d79e4))
+* **api:** Expose tool router search ([4d3a6c7](https://github.com/ComposioHQ/composio-base-py/commit/4d3a6c77103b5e9f9870ee5a3b2a7c0d896fb73c))
+* **api:** expose trigger logs ([ca9bd66](https://github.com/ComposioHQ/composio-base-py/commit/ca9bd66e5486f12bd400e33367a92e862b765af4))
+* **api:** fix tool log fetching ([ae97e89](https://github.com/ComposioHQ/composio-base-py/commit/ae97e89ef5025d38ef176247bea3be679e23a486))
+* **client:** add custom JSON encoder for extended type support ([d774c24](https://github.com/ComposioHQ/composio-base-py/commit/d774c2460b2b7c36e4f2c7e14187b31d398a87c4))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([7a27397](https://github.com/ComposioHQ/composio-base-py/commit/7a273974a0c562345a9154f7697ed98b06d78c5c))
+* **ci:** upgrade `actions/github-script` ([7e06e83](https://github.com/ComposioHQ/composio-base-py/commit/7e06e835445d65b500759141a12d2f9b93593a88))
+* **docs:** add missing descriptions ([0797615](https://github.com/ComposioHQ/composio-base-py/commit/0797615c430b90204af97067f9f47f02cf129bce))
+* format all `api.md` files ([3372c7a](https://github.com/ComposioHQ/composio-base-py/commit/3372c7a171c8d7cad05988c2adaf78a4750674f3))
+* **internal:** add request options to SSE classes ([f681ffb](https://github.com/ComposioHQ/composio-base-py/commit/f681ffb04849685c96da6a8518a49981c107b493))
+* **internal:** bump dependencies ([05a491e](https://github.com/ComposioHQ/composio-base-py/commit/05a491e9af420488ca09fac02a2067070d1706b7))
+* **internal:** fix lint error on Python 3.14 ([160e229](https://github.com/ComposioHQ/composio-base-py/commit/160e2290f278b14d06c68d47a2fb3699849c9006))
+* **internal:** make `test_proxy_environment_variables` more resilient ([a0187e4](https://github.com/ComposioHQ/composio-base-py/commit/a0187e432399cd2a53bbbbcadb220dbc9a8069ed))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([5379b46](https://github.com/ComposioHQ/composio-base-py/commit/5379b465da8182d624511634b6d04b6d8ac2bcfa))
+* **test:** do not count install time for mock server timeout ([070daaf](https://github.com/ComposioHQ/composio-base-py/commit/070daafe7e7c46cff308a0587ecee96c3a3e6136))
+* update mock server docs ([2181b43](https://github.com/ComposioHQ/composio-base-py/commit/2181b43048835ac3636e12f4359d77e4da42d4e3))
+
+
+### Refactors
+
+* **types:** use `extra_items` from PEP 728 ([f394596](https://github.com/ComposioHQ/composio-base-py/commit/f3945968997d7f883603d029692f938ad38f78c2))
+
 ## 1.27.0 (2026-01-22)
 
 Full Changelog: [v1.26.0...v1.27.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.26.0...v1.27.0)

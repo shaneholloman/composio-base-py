@@ -2,27 +2,42 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
-from ..types import cli_get_session_params
-from .._types import Body, Query, Headers, NotGiven, not_given
-from .._utils import maybe_transform, async_maybe_transform
-from .._compat import cached_property
-from .._resource import SyncAPIResource, AsyncAPIResource
-from .._response import (
+from ...types import cli_get_session_params, cli_create_session_params
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
+from .realtime import (
+    RealtimeResource,
+    AsyncRealtimeResource,
+    RealtimeResourceWithRawResponse,
+    AsyncRealtimeResourceWithRawResponse,
+    RealtimeResourceWithStreamingResponse,
+    AsyncRealtimeResourceWithStreamingResponse,
+)
+from ..._compat import cached_property
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from ..._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .._base_client import make_request_options
-from ..types.cli_get_session_response import CliGetSessionResponse
-from ..types.cli_create_session_response import CliCreateSessionResponse
+from ..._base_client import make_request_options
+from ...types.cli_get_session_response import CliGetSessionResponse
+from ...types.cli_create_session_response import CliCreateSessionResponse
 
 __all__ = ["CliResource", "AsyncCliResource"]
 
 
 class CliResource(SyncAPIResource):
+    @cached_property
+    def realtime(self) -> RealtimeResource:
+        """CLI integration endpoints"""
+        return RealtimeResource(self._client)
+
     @cached_property
     def with_raw_response(self) -> CliResourceWithRawResponse:
         """
@@ -45,6 +60,8 @@ class CliResource(SyncAPIResource):
     def create_session(
         self,
         *,
+        scope: Literal["project", "user"] | Omit = omit,
+        source: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -58,9 +75,31 @@ class CliResource(SyncAPIResource):
         first step in the CLI authentication flow, creating a session that can later be
         linked to a user account. The generated code is displayed to the user in the CLI
         and should be entered in the web interface to complete authentication.
+        Optionally accepts a scope ('project' or 'user') and a source string.
+
+        Args:
+          scope: Key scope. 'project' (default) returns a project-level API key; 'user' returns a
+              user-level API key valid across projects.
+
+          source: Free-form string describing the source, e.g. 'Johns MacBook (darwin, v1.2.3)'
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
             "/api/v3/cli/create-session",
+            body=maybe_transform(
+                {
+                    "scope": scope,
+                    "source": source,
+                },
+                cli_create_session_params.CliCreateSessionParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -111,6 +150,11 @@ class CliResource(SyncAPIResource):
 
 class AsyncCliResource(AsyncAPIResource):
     @cached_property
+    def realtime(self) -> AsyncRealtimeResource:
+        """CLI integration endpoints"""
+        return AsyncRealtimeResource(self._client)
+
+    @cached_property
     def with_raw_response(self) -> AsyncCliResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -132,6 +176,8 @@ class AsyncCliResource(AsyncAPIResource):
     async def create_session(
         self,
         *,
+        scope: Literal["project", "user"] | Omit = omit,
+        source: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,9 +191,31 @@ class AsyncCliResource(AsyncAPIResource):
         first step in the CLI authentication flow, creating a session that can later be
         linked to a user account. The generated code is displayed to the user in the CLI
         and should be entered in the web interface to complete authentication.
+        Optionally accepts a scope ('project' or 'user') and a source string.
+
+        Args:
+          scope: Key scope. 'project' (default) returns a project-level API key; 'user' returns a
+              user-level API key valid across projects.
+
+          source: Free-form string describing the source, e.g. 'Johns MacBook (darwin, v1.2.3)'
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
             "/api/v3/cli/create-session",
+            body=await async_maybe_transform(
+                {
+                    "scope": scope,
+                    "source": source,
+                },
+                cli_create_session_params.CliCreateSessionParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -207,6 +275,11 @@ class CliResourceWithRawResponse:
             cli.get_session,
         )
 
+    @cached_property
+    def realtime(self) -> RealtimeResourceWithRawResponse:
+        """CLI integration endpoints"""
+        return RealtimeResourceWithRawResponse(self._cli.realtime)
+
 
 class AsyncCliResourceWithRawResponse:
     def __init__(self, cli: AsyncCliResource) -> None:
@@ -218,6 +291,11 @@ class AsyncCliResourceWithRawResponse:
         self.get_session = async_to_raw_response_wrapper(
             cli.get_session,
         )
+
+    @cached_property
+    def realtime(self) -> AsyncRealtimeResourceWithRawResponse:
+        """CLI integration endpoints"""
+        return AsyncRealtimeResourceWithRawResponse(self._cli.realtime)
 
 
 class CliResourceWithStreamingResponse:
@@ -231,6 +309,11 @@ class CliResourceWithStreamingResponse:
             cli.get_session,
         )
 
+    @cached_property
+    def realtime(self) -> RealtimeResourceWithStreamingResponse:
+        """CLI integration endpoints"""
+        return RealtimeResourceWithStreamingResponse(self._cli.realtime)
+
 
 class AsyncCliResourceWithStreamingResponse:
     def __init__(self, cli: AsyncCliResource) -> None:
@@ -242,3 +325,8 @@ class AsyncCliResourceWithStreamingResponse:
         self.get_session = async_to_streamed_response_wrapper(
             cli.get_session,
         )
+
+    @cached_property
+    def realtime(self) -> AsyncRealtimeResourceWithStreamingResponse:
+        """CLI integration endpoints"""
+        return AsyncRealtimeResourceWithStreamingResponse(self._cli.realtime)
