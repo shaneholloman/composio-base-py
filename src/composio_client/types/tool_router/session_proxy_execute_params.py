@@ -2,16 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Iterable, Optional
+from typing import Union, Iterable, Optional
 from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
-from .._types import SequenceNotStr
-from .._utils import PropertyInfo
+from ..._types import SequenceNotStr
+from ..._utils import PropertyInfo
 
 __all__ = [
-    "ToolExecuteParams",
-    "CustomAuthParams",
-    "CustomAuthParamsParameter",
+    "SessionProxyExecuteParams",
+    "BinaryBody",
+    "BinaryBodyUnionMember0",
+    "BinaryBodyUnionMember1",
     "CustomConnectionData",
     "CustomConnectionDataUnionMember0",
     "CustomConnectionDataUnionMember0Val",
@@ -36,93 +37,56 @@ __all__ = [
     "CustomConnectionDataUnionMember9Val",
     "CustomConnectionDataUnionMember10",
     "CustomConnectionDataUnionMember10Val",
+    "Parameter",
 ]
 
 
-class ToolExecuteParams(TypedDict, total=False):
-    allow_tracing: Optional[bool]
-    """Deprecated. Enable debug tracing for tool execution (useful for debugging)"""
-
-    arguments: Dict[str, Optional[object]]
+class SessionProxyExecuteParams(TypedDict, total=False):
+    endpoint: Required[str]
     """
-    Key-value pairs of arguments required by the tool (mutually exclusive with text)
+    The API endpoint to call (absolute URL or path relative to base URL of the
+    connected account)
     """
 
-    connected_account_id: str
-    """Unique identifier for the connected account to use for authentication"""
+    method: Required[Literal["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD"]]
+    """The HTTP method to use for the request"""
 
-    custom_auth_params: CustomAuthParams
+    toolkit_slug: Required[str]
+    """The slug of the toolkit to use for the request"""
+
+    binary_body: BinaryBody
+    """Binary body to send.
+
+    For binary upload via URL: use {url: "https://...", content_type?: "..."}. For
+    binary upload via base64: use {base64: "...", content_type?: "..."}.
     """
-    Custom authentication parameters for tools that support parameterized
-    authentication
-    """
+
+    body: object
+    """The request body (for POST, PUT, and PATCH requests)"""
 
     custom_connection_data: CustomConnectionData
-    """Custom connection data for tools that support custom connection data"""
 
-    entity_id: str
-    """Deprecated: please use user_id instead.
-
-    Entity identifier for multi-entity connected accounts (e.g. multiple
-    repositories, organizations)
-    """
-
-    text: str
-    """
-    Natural language description of the task to perform (mutually exclusive with
-    arguments)
-    """
-
-    user_id: str
-    """User id for multi-user connected accounts (e.g. multiple users, organizations)"""
-
-    version: str
-    """Tool version to execute (defaults to "00000000_00" if not specified)"""
-
-    x_llm_gateway_headers: Annotated[str, PropertyInfo(alias="x-llm-gateway-headers")]
-    """
-    JSON object containing custom headers to pass to LLM providers (OpenAI, Bedrock,
-    etc.)
-    """
+    parameters: Iterable[Parameter]
+    """Additional HTTP headers or query parameters to include in the request"""
 
 
-_CustomAuthParamsParameterReservedKeywords = TypedDict(
-    "_CustomAuthParamsParameterReservedKeywords",
-    {
-        "in": Literal["query", "header"],
-    },
-    total=False,
-)
+class BinaryBodyUnionMember0(TypedDict, total=False):
+    url: Required[str]
+    """URL to fetch binary content from"""
+
+    content_type: str
+    """Content-Type header to use for the request"""
 
 
-class CustomAuthParamsParameter(_CustomAuthParamsParameterReservedKeywords, total=False):
-    name: Required[str]
-    """The name of the parameter. For example, 'x-api-key', 'Content-Type', etc."""
+class BinaryBodyUnionMember1(TypedDict, total=False):
+    base64: Required[str]
+    """Base64-encoded binary data"""
 
-    value: Required[Union[str, float]]
-    """The value of the parameter. For example, '1234567890', 'application/json', etc."""
+    content_type: str
+    """Content-Type header to use for the request"""
 
 
-class CustomAuthParams(TypedDict, total=False):
-    """
-    Custom authentication parameters for tools that support parameterized authentication
-    """
-
-    base_url: str
-    """
-    The base URL (root address) what you should use while making http requests to
-    the connected account. For example, for gmail, it would be
-    'https://gmail.googleapis.com'
-    """
-
-    body: Dict[str, Optional[object]]
-    """The body to be sent to the endpoint for authentication.
-
-    This is a JSON object. Note: This is very rarely needed and is only required by
-    very few apps.
-    """
-
-    parameters: Iterable[CustomAuthParamsParameter]
+BinaryBody: TypeAlias = Union[BinaryBodyUnionMember0, BinaryBodyUnionMember1]
 
 
 class CustomConnectionDataUnionMember0ValAuthedUser(TypedDict, total=False):
@@ -843,3 +807,14 @@ CustomConnectionData: TypeAlias = Union[
     CustomConnectionDataUnionMember9,
     CustomConnectionDataUnionMember10,
 ]
+
+
+class Parameter(TypedDict, total=False):
+    name: Required[str]
+    """Parameter name"""
+
+    type: Required[Literal["header", "query"]]
+    """Parameter type (header or query)"""
+
+    value: Required[str]
+    """Parameter value"""

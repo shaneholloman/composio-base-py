@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.29.0 (2026-03-19)
+
+Full Changelog: [v1.28.0...v1.29.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.28.0...v1.29.0)
+
+### Features
+
+* **api:** api update ([ed8fc3d](https://github.com/ComposioHQ/composio-base-py/commit/ed8fc3df2af153601db496e3f6afdd6c0b602aa3))
+* **api:** api update ([f77a977](https://github.com/ComposioHQ/composio-base-py/commit/f77a977fc822f4706857d071352a91ee4ecfd1bd))
+* **api:** api update ([c26c962](https://github.com/ComposioHQ/composio-base-py/commit/c26c962694e701611b6a8d74f8a979e3616c0c8b))
+* **api:** session proxy execute ([4baa2f3](https://github.com/ComposioHQ/composio-base-py/commit/4baa2f3945157c10ad9b34342f95a299204b9ecf))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([896893c](https://github.com/ComposioHQ/composio-base-py/commit/896893c97e92762d7938eb4b985dc48b6fc9c6a1))
+* **pydantic:** do not pass `by_alias` unless set ([e88ce4d](https://github.com/ComposioHQ/composio-base-py/commit/e88ce4d68601e9072f2027d8d5a0de96661ddd57))
+* sanitize endpoint path params ([e81e296](https://github.com/ComposioHQ/composio-base-py/commit/e81e296772bf742a05aa3437734d735900d23ced))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([5e4fb22](https://github.com/ComposioHQ/composio-base-py/commit/5e4fb22fcab3e4f06f47164502e656aabeea17d8))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([09164e7](https://github.com/ComposioHQ/composio-base-py/commit/09164e710e8c8a87d5f20b989d2c9a94e90360c0))
+
 ## 1.28.0 (2026-03-09)
 
 Full Changelog: [v1.27.0...v1.28.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.27.0...v1.28.0)
