@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.30.0 (2026-04-09)
+
+Full Changelog: [v1.29.0...v1.30.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.29.0...v1.30.0)
+
+### Features
+
+* **api:** api update ([3d846cf](https://github.com/ComposioHQ/composio-base-py/commit/3d846cfcd382e88e5e294e2205eba6a8f7e115c2))
+* **api:** api update ([cca7d10](https://github.com/ComposioHQ/composio-base-py/commit/cca7d1007cf82bc585482f915d891127930ae684))
+* **api:** api update ([fd014a3](https://github.com/ComposioHQ/composio-base-py/commit/fd014a3a16c1f42a7fc3b546553f163b2edb8ebd))
+* **api:** api update ([456a951](https://github.com/ComposioHQ/composio-base-py/commit/456a951c8e8d394c3c527b9d51b57232eedc252e))
+* **api:** api update ([3063064](https://github.com/ComposioHQ/composio-base-py/commit/3063064f10b7d92d975f77da2bcd12218b40fc3c))
+* **api:** api update ([76e370d](https://github.com/ComposioHQ/composio-base-py/commit/76e370db4a91f01c01dff074ee942d86f9c53a8b))
+* **api:** api update ([7be630b](https://github.com/ComposioHQ/composio-base-py/commit/7be630b302a8e63f403f1892c57ca0523a5aab5a))
+* **api:** api update ([aa74b83](https://github.com/ComposioHQ/composio-base-py/commit/aa74b8383f8b492a8ba7ca7275c7ec4ae86dbc45))
+* **api:** api update ([59b789a](https://github.com/ComposioHQ/composio-base-py/commit/59b789a1302cfb75ed155a52c44376e67a93d14f))
+* **api:** patch connected accounts ([0dadfee](https://github.com/ComposioHQ/composio-base-py/commit/0dadfee6fc7e5b3e395873f0981c1a03b23cdcad))
+* **internal:** implement indices array format for query and form serialization ([c4a0c69](https://github.com/ComposioHQ/composio-base-py/commit/c4a0c699687463ad6dbc90b1de699e8287799c5a))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([3182ada](https://github.com/ComposioHQ/composio-base-py/commit/3182adab6e5954a9c39267dcbfa957b2b7bd38ae))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([9f3cd6e](https://github.com/ComposioHQ/composio-base-py/commit/9f3cd6e138bcd1d378da2541ed2911b18cccf2ee))
+* **internal:** update gitignore ([1dceceb](https://github.com/ComposioHQ/composio-base-py/commit/1dceceb2a7b56abe7401440eff604fa30ce9fba1))
+* **tests:** bump steady to v0.19.4 ([7eeb163](https://github.com/ComposioHQ/composio-base-py/commit/7eeb163a6c1d1ce0043d5035a34224246ac26100))
+* **tests:** bump steady to v0.19.5 ([fcb176d](https://github.com/ComposioHQ/composio-base-py/commit/fcb176d1f3d1fda7e71a2b792a9073199b2c93f8))
+* **tests:** bump steady to v0.19.6 ([62be483](https://github.com/ComposioHQ/composio-base-py/commit/62be48301a2628cf19a28623f299b28b0aa30865))
+* **tests:** bump steady to v0.19.7 ([53a1537](https://github.com/ComposioHQ/composio-base-py/commit/53a1537fd6543160182b63ada0e036b8889e0a0e))
+* **tests:** bump steady to v0.20.1 ([27056bd](https://github.com/ComposioHQ/composio-base-py/commit/27056bd6d1f59750a899acfc0eaa19a88c8062d1))
+* **tests:** bump steady to v0.20.2 ([4181602](https://github.com/ComposioHQ/composio-base-py/commit/418160209c2b019219a7fe3ad636ed33dc48f122))
+
 ## 1.29.0 (2026-03-19)
 
 Full Changelog: [v1.28.0...v1.29.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.28.0...v1.29.0)
