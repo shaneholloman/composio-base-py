@@ -82,6 +82,7 @@ class TestSession:
             manage_connections={
                 "callback_url": "https://your-app.com/auth/callback",
                 "enable": True,
+                "enable_connection_removal": True,
                 "enable_wait_for_connections": False,
             },
             tags={
@@ -173,7 +174,7 @@ class TestSession:
     def test_method_execute(self, client: Composio) -> None:
         session = client.tool_router.session.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         )
         assert_matches_type(SessionExecuteResponse, session, path=["response"])
 
@@ -181,7 +182,8 @@ class TestSession:
     def test_method_execute_with_all_params(self, client: Composio) -> None:
         session = client.tool_router.session.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
+            account="coup_hurricane_dal_analytical",
             arguments={
                 "repository": "bar",
                 "workflow_id": "bar",
@@ -195,7 +197,7 @@ class TestSession:
     def test_raw_response_execute(self, client: Composio) -> None:
         response = client.tool_router.session.with_raw_response.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         )
 
         assert response.is_closed is True
@@ -207,7 +209,7 @@ class TestSession:
     def test_streaming_response_execute(self, client: Composio) -> None:
         with client.tool_router.session.with_streaming_response.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -222,7 +224,7 @@ class TestSession:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             client.tool_router.session.with_raw_response.execute(
                 session_id="",
-                tool_slug="GITHUB_CREATE_ISSUE",
+                tool_slug="GITHUB_CREATE_AN_ISSUE",
             )
 
     @parametrize
@@ -520,7 +522,7 @@ class TestSession:
             session_id="trs_123456789",
             cursor="cursor",
             is_connected=True,
-            limit=0,
+            limit=1,
             search="gmail",
             toolkits=["string"],
         )
@@ -656,6 +658,7 @@ class TestAsyncSession:
             manage_connections={
                 "callback_url": "https://your-app.com/auth/callback",
                 "enable": True,
+                "enable_connection_removal": True,
                 "enable_wait_for_connections": False,
             },
             tags={
@@ -747,7 +750,7 @@ class TestAsyncSession:
     async def test_method_execute(self, async_client: AsyncComposio) -> None:
         session = await async_client.tool_router.session.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         )
         assert_matches_type(SessionExecuteResponse, session, path=["response"])
 
@@ -755,7 +758,8 @@ class TestAsyncSession:
     async def test_method_execute_with_all_params(self, async_client: AsyncComposio) -> None:
         session = await async_client.tool_router.session.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
+            account="coup_hurricane_dal_analytical",
             arguments={
                 "repository": "bar",
                 "workflow_id": "bar",
@@ -769,7 +773,7 @@ class TestAsyncSession:
     async def test_raw_response_execute(self, async_client: AsyncComposio) -> None:
         response = await async_client.tool_router.session.with_raw_response.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         )
 
         assert response.is_closed is True
@@ -781,7 +785,7 @@ class TestAsyncSession:
     async def test_streaming_response_execute(self, async_client: AsyncComposio) -> None:
         async with async_client.tool_router.session.with_streaming_response.execute(
             session_id="trs_LX9uJKBinWWr",
-            tool_slug="GITHUB_CREATE_ISSUE",
+            tool_slug="GITHUB_CREATE_AN_ISSUE",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -796,7 +800,7 @@ class TestAsyncSession:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `session_id` but received ''"):
             await async_client.tool_router.session.with_raw_response.execute(
                 session_id="",
-                tool_slug="GITHUB_CREATE_ISSUE",
+                tool_slug="GITHUB_CREATE_AN_ISSUE",
             )
 
     @parametrize
@@ -1094,7 +1098,7 @@ class TestAsyncSession:
             session_id="trs_123456789",
             cursor="cursor",
             is_connected=True,
-            limit=0,
+            limit=1,
             search="gmail",
             toolkits=["string"],
         )
