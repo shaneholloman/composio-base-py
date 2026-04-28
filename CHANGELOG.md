@@ -1,5 +1,38 @@
 # Changelog
 
+## 1.34.0 (2026-04-28)
+
+Full Changelog: [v1.33.0...v1.34.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.33.0...v1.34.0)
+
+### Features
+
+* **api:** api update ([d3e3fc6](https://github.com/ComposioHQ/composio-base-py/commit/d3e3fc60a3e067470353543ee23884ec154af103))
+* **api:** api update ([c833cac](https://github.com/ComposioHQ/composio-base-py/commit/c833cac7ef19402f561d22deeff51b233ca8e4ea))
+* **api:** api update ([3262fa1](https://github.com/ComposioHQ/composio-base-py/commit/3262fa199a549851935645bc8531c4439a3d7326))
+* **api:** api update ([bc9b387](https://github.com/ComposioHQ/composio-base-py/commit/bc9b3870bfd4c82b6b8828f7e65588c8c936ddb4))
+* **api:** api update ([1acabdb](https://github.com/ComposioHQ/composio-base-py/commit/1acabdbf562175d447865d200296778f6a31498e))
+* **api:** api update ([5eda052](https://github.com/ComposioHQ/composio-base-py/commit/5eda052338ed626b161062ad4024603f19074414))
+* **api:** api update ([9eb2939](https://github.com/ComposioHQ/composio-base-py/commit/9eb29396cf3d262c78e232bbb964965d4961dafa))
+* **api:** api update ([3c1588b](https://github.com/ComposioHQ/composio-base-py/commit/3c1588b78cb82609b2718e51c653807baec4120b))
+* support setting headers via env ([41f3682](https://github.com/ComposioHQ/composio-base-py/commit/41f368258c8c0632f93fabbf00ab9fa2e7886c29))
+
+
+### Bug Fixes
+
+* ensure file data are only sent as 1 parameter ([e955841](https://github.com/ComposioHQ/composio-base-py/commit/e955841e1ef475fb171972a0c4199babb62c0645))
+* use correct field name format for multipart file arrays ([d058b4f](https://github.com/ComposioHQ/composio-base-py/commit/d058b4f1bd253adb4fe6404f77f4b19b81a47fd4))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([a165bbb](https://github.com/ComposioHQ/composio-base-py/commit/a165bbbc754c240aacb11e6bcb0133652f3d19be))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([d24b268](https://github.com/ComposioHQ/composio-base-py/commit/d24b268ab16bd63b37097e97c5351a5e128b34bb))
+* **tests:** bump steady to v0.22.1 ([74ee81e](https://github.com/ComposioHQ/composio-base-py/commit/74ee81e237a81c84d35eb69e06d26c20f21cc7dd))
+
 ## 1.33.0 (2026-04-10)
 
 Full Changelog: [v1.32.0...v1.33.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.32.0...v1.33.0)
