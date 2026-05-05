@@ -6,7 +6,7 @@ from typing_extensions import Literal, TypeAlias
 from ..._models import BaseModel
 
 __all__ = [
-    "SessionRetrieveResponse",
+    "SessionPatchResponse",
     "Config",
     "ConfigExecute",
     "ConfigPreload",
@@ -297,7 +297,7 @@ class Warning(BaseModel):
     """
 
 
-class SessionRetrieveResponse(BaseModel):
+class SessionPatchResponse(BaseModel):
     config: Config
     """The configuration used to create this session"""
 

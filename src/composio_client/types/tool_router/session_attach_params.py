@@ -6,8 +6,7 @@ from typing import Dict, Iterable, Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = [
-    "SessionSearchParams",
-    "Query",
+    "SessionAttachParams",
     "Experimental",
     "ExperimentalCustomToolkit",
     "ExperimentalCustomToolkitTool",
@@ -15,32 +14,12 @@ __all__ = [
 ]
 
 
-class SessionSearchParams(TypedDict, total=False):
-    queries: Required[Iterable[Query]]
-    """List of search queries to execute in parallel."""
-
+class SessionAttachParams(TypedDict, total=False):
     experimental: Experimental
     """Inline custom tools and toolkits for this request.
 
     v3.1 sessions do not persist customs — pass them on every request that needs
     them.
-    """
-
-    model: str
-    """Optional model hint for search/planning behavior (e.g., "gpt-4o")."""
-
-
-class Query(TypedDict, total=False):
-    use_case: Required[str]
-    """The task or use case to search tools for.
-
-    Provide a detailed description to get the best results. Max 1024 characters.
-    """
-
-    known_fields: str
-    """
-    Known field hints as key:value pairs (e.g., "channel_name:general,
-    user_email:john@example.com"). Max 500 characters.
     """
 
 

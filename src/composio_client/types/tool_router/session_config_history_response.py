@@ -1,44 +1,40 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Union, Optional
+from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
 __all__ = [
-    "SessionRetrieveResponse",
-    "Config",
-    "ConfigExecute",
-    "ConfigPreload",
-    "ConfigSearch",
-    "ConfigManageConnections",
-    "ConfigMultiAccount",
-    "ConfigTags",
-    "ConfigToolkits",
-    "ConfigToolkitsEnabled",
-    "ConfigToolkitsDisabled",
-    "ConfigTools",
-    "ConfigToolsEnabled",
-    "ConfigToolsDisabled",
-    "ConfigToolsTags",
-    "ConfigToolsTagsTags",
-    "ConfigWorkbench",
-    "Mcp",
-    "Experimental",
-    "ExperimentalCustomToolkit",
-    "ExperimentalCustomToolkitTool",
-    "ExperimentalCustomTool",
-    "Warning",
+    "SessionConfigHistoryResponse",
+    "Item",
+    "ItemConfig",
+    "ItemConfigExecute",
+    "ItemConfigPreload",
+    "ItemConfigSearch",
+    "ItemConfigManageConnections",
+    "ItemConfigMultiAccount",
+    "ItemConfigTags",
+    "ItemConfigToolkits",
+    "ItemConfigToolkitsEnabled",
+    "ItemConfigToolkitsDisabled",
+    "ItemConfigTools",
+    "ItemConfigToolsEnabled",
+    "ItemConfigToolsDisabled",
+    "ItemConfigToolsTags",
+    "ItemConfigToolsTagsTags",
+    "ItemConfigWorkbench",
 ]
 
 
-class ConfigExecute(BaseModel):
+class ItemConfigExecute(BaseModel):
     """Execute helper configuration"""
 
     enable_multi_execute: Optional[bool] = None
 
 
-class ConfigPreload(BaseModel):
+class ItemConfigPreload(BaseModel):
     """Preload configuration.
 
     Explicit slugs are returned as an array; dynamic preload is returned as "all".
@@ -51,13 +47,13 @@ class ConfigPreload(BaseModel):
     """
 
 
-class ConfigSearch(BaseModel):
+class ItemConfigSearch(BaseModel):
     """Search helper configuration"""
 
     enable: Optional[bool] = None
 
 
-class ConfigManageConnections(BaseModel):
+class ItemConfigManageConnections(BaseModel):
     """Manage connections configuration"""
 
     callback_url: Optional[str] = None
@@ -76,7 +72,7 @@ class ConfigManageConnections(BaseModel):
     """Whether to enable the connection manager for automatic connection handling"""
 
 
-class ConfigMultiAccount(BaseModel):
+class ItemConfigMultiAccount(BaseModel):
     """Multi-account configuration for this session."""
 
     enable: Optional[bool] = None
@@ -98,7 +94,7 @@ class ConfigMultiAccount(BaseModel):
     """
 
 
-class ConfigTags(BaseModel):
+class ItemConfigTags(BaseModel):
     """MCP tool annotation hints for filtering tools with enabled/disabled support.
 
     enabled: tags that the tool must have at least one of. disabled: tags that the tool must NOT have any of. Both conditions must be satisfied.
@@ -111,26 +107,26 @@ class ConfigTags(BaseModel):
     """Tags that the tool must have at least one of"""
 
 
-class ConfigToolkitsEnabled(BaseModel):
+class ItemConfigToolkitsEnabled(BaseModel):
     enabled: List[str]
 
 
-class ConfigToolkitsDisabled(BaseModel):
+class ItemConfigToolkitsDisabled(BaseModel):
     disabled: List[str]
 
 
-ConfigToolkits: TypeAlias = Union[ConfigToolkitsEnabled, ConfigToolkitsDisabled]
+ItemConfigToolkits: TypeAlias = Union[ItemConfigToolkitsEnabled, ItemConfigToolkitsDisabled]
 
 
-class ConfigToolsEnabled(BaseModel):
+class ItemConfigToolsEnabled(BaseModel):
     enabled: List[str]
 
 
-class ConfigToolsDisabled(BaseModel):
+class ItemConfigToolsDisabled(BaseModel):
     disabled: List[str]
 
 
-class ConfigToolsTagsTags(BaseModel):
+class ItemConfigToolsTagsTags(BaseModel):
     disabled: Optional[List[Literal["readOnlyHint", "destructiveHint", "idempotentHint", "openWorldHint"]]] = None
     """Tags that the tool must NOT have any of"""
 
@@ -138,14 +134,14 @@ class ConfigToolsTagsTags(BaseModel):
     """Tags that the tool must have at least one of"""
 
 
-class ConfigToolsTags(BaseModel):
-    tags: ConfigToolsTagsTags
+class ItemConfigToolsTags(BaseModel):
+    tags: ItemConfigToolsTagsTags
 
 
-ConfigTools: TypeAlias = Union[ConfigToolsEnabled, ConfigToolsDisabled, ConfigToolsTags]
+ItemConfigTools: TypeAlias = Union[ItemConfigToolsEnabled, ItemConfigToolsDisabled, ItemConfigToolsTags]
 
 
-class ConfigWorkbench(BaseModel):
+class ItemConfigWorkbench(BaseModel):
     """Workbench configuration"""
 
     auto_offload_threshold: Optional[float] = None
@@ -171,19 +167,19 @@ class ConfigWorkbench(BaseModel):
     """
 
 
-class Config(BaseModel):
-    """The configuration used to create this session"""
+class ItemConfig(BaseModel):
+    """The session configuration at this version"""
 
-    execute: ConfigExecute
+    execute: ItemConfigExecute
     """Execute helper configuration"""
 
-    preload: ConfigPreload
+    preload: ItemConfigPreload
     """Preload configuration.
 
     Explicit slugs are returned as an array; dynamic preload is returned as "all".
     """
 
-    search: ConfigSearch
+    search: ItemConfigSearch
     """Search helper configuration"""
 
     user_id: str
@@ -198,128 +194,57 @@ class Config(BaseModel):
     Each connected account must belong to the same user_id as the session.
     """
 
-    manage_connections: Optional[ConfigManageConnections] = None
+    manage_connections: Optional[ItemConfigManageConnections] = None
     """Manage connections configuration"""
 
-    multi_account: Optional[ConfigMultiAccount] = None
+    multi_account: Optional[ItemConfigMultiAccount] = None
     """Multi-account configuration for this session."""
 
-    tags: Optional[ConfigTags] = None
+    tags: Optional[ItemConfigTags] = None
     """MCP tool annotation hints for filtering tools with enabled/disabled support.
 
     enabled: tags that the tool must have at least one of. disabled: tags that the
     tool must NOT have any of. Both conditions must be satisfied.
     """
 
-    toolkits: Optional[ConfigToolkits] = None
+    toolkits: Optional[ItemConfigToolkits] = None
     """Toolkit configuration - either enabled list or disabled list"""
 
-    tools: Optional[Dict[str, ConfigTools]] = None
+    tools: Optional[Dict[str, ItemConfigTools]] = None
     """Tool-level configuration per toolkit"""
 
-    workbench: Optional[ConfigWorkbench] = None
+    workbench: Optional[ItemConfigWorkbench] = None
     """Workbench configuration"""
 
 
-class Mcp(BaseModel):
-    type: Literal["http"]
-    """The type of the MCP server. Can be http"""
+class Item(BaseModel):
+    config: ItemConfig
+    """The session configuration at this version"""
 
-    url: str
-    """The URL of the MCP server"""
+    created_at: datetime
+    """ISO timestamp.
 
-
-class ExperimentalCustomToolkitTool(BaseModel):
-    description: str
-
-    input_schema: Dict[str, Optional[object]]
-
-    name: str
-
-    original_slug: str
-    """Original tool slug as provided by the user"""
-
-    slug: str
-    """Prefixed tool slug (e.g. LOCAL_CRM_FIND_CUSTOMER)"""
-
-    output_schema: Optional[Dict[str, Optional[object]]] = None
-
-
-class ExperimentalCustomToolkit(BaseModel):
-    description: str
-
-    name: str
-
-    slug: str
-
-    tools: List[ExperimentalCustomToolkitTool]
-
-
-class ExperimentalCustomTool(BaseModel):
-    description: str
-
-    input_schema: Dict[str, Optional[object]]
-
-    name: str
-
-    original_slug: str
-    """Original tool slug as provided by the user"""
-
-    slug: str
-    """Prefixed tool slug (e.g. LOCAL_GMAIL_GET_IMPORTANT_EMAILS)"""
-
-    extends_toolkit: Optional[str] = None
-
-    output_schema: Optional[Dict[str, Optional[object]]] = None
-
-
-class Experimental(BaseModel):
-    """Experimental features"""
-
-    assistive_prompt: Optional[str] = None
-    """The assistive system prompt for the tool router session"""
-
-    custom_toolkits: Optional[List[ExperimentalCustomToolkit]] = None
-    """User-defined custom toolkits with grouped tools (no-auth)"""
-
-    custom_tools: Optional[List[ExperimentalCustomTool]] = None
-    """Custom tools — standalone or extending Composio toolkits"""
-
-
-class Warning(BaseModel):
-    code: Literal["PRELOAD_TOOLS_HIGH_CONTEXT_USAGE"]
-    """Stable machine code identifying the advisory. Safe to switch on in client code."""
-
-    message: str
-    """Human-readable description of the advisory.
-
-    Suitable for logging or surfacing to end users.
+    For history rows, when the entry was archived (i.e. the moment the version was
+    superseded by a PATCH).
     """
 
+    is_current: bool
+    """True only for the live (current) session config, present on the first page.
 
-class SessionRetrieveResponse(BaseModel):
-    config: Config
-    """The configuration used to create this session"""
-
-    config_version: int
-    """Monotonic version of the config.
-
-    Incremented on each PATCH. Use for optimistic concurrency control.
+    False for archived history rows.
     """
 
-    mcp: Mcp
+    version: int
+    """The config version this entry represents"""
 
-    session_id: str
-    """The identifier of the session"""
 
-    tool_router_tools: List[str]
-    """List of available tools in this session"""
+class SessionConfigHistoryResponse(BaseModel):
+    current_page: float
 
-    experimental: Optional[Experimental] = None
-    """Experimental features"""
+    items: List[Item]
 
-    warnings: Optional[List[Warning]] = None
-    """
-    Advisory list — the session exists and is usable, but the listed issues may
-    warrant attention.
-    """
+    total_items: float
+
+    total_pages: float
+
+    next_cursor: Optional[str] = None

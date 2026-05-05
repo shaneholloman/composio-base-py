@@ -2,19 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, List, Union, Optional
 from typing_extensions import Literal, Required, TypeAlias, TypedDict
 
 from ..._types import SequenceNotStr
 
 __all__ = [
-    "SessionCreateParams",
+    "SessionPatchParams",
     "Execute",
     "Experimental",
-    "ExperimentalAssistivePromptConfig",
-    "ExperimentalCustomToolkit",
-    "ExperimentalCustomToolkitTool",
-    "ExperimentalCustomTool",
     "ExperimentalPermissions",
     "ManageConnections",
     "MultiAccount",
@@ -35,13 +31,7 @@ __all__ = [
 ]
 
 
-class SessionCreateParams(TypedDict, total=False):
-    user_id: Required[str]
-    """
-    The identifier of the user who is initiating the session, ideally a unique
-    identifier from your database like a user ID or email address
-    """
-
+class SessionPatchParams(TypedDict, total=False):
     auth_configs: Dict[str, str]
     """The auth configs to use for the session.
 
@@ -61,20 +51,11 @@ class SessionCreateParams(TypedDict, total=False):
 
     execute: Execute
 
-    experimental: Experimental
-    """
-    Experimental features - not stable, may be modified or removed in future
-    versions.
-    """
+    experimental: Optional[Experimental]
 
-    manage_connections: ManageConnections
-    """Configuration for connection management settings"""
+    manage_connections: Optional[ManageConnections]
 
-    multi_account: MultiAccount
-    """Configure multi-account behavior.
-
-    When enabled, users can connect multiple accounts per toolkit.
-    """
+    multi_account: Optional[MultiAccount]
 
     preload: Preload
     """Preload configuration.
@@ -109,94 +90,17 @@ class SessionCreateParams(TypedDict, total=False):
     clear error listing which ones didn't match.
     """
 
-    workbench: Workbench
-    """Configuration for workbench behavior"""
+    workbench: Optional[Workbench]
 
 
 class Execute(TypedDict, total=False):
     enable_multi_execute: bool
 
 
-class ExperimentalAssistivePromptConfig(TypedDict, total=False):
-    """Customize assistive prompt generation (e.g., timezone)."""
-
-    user_timezone: str
-    """IANA timezone identifier (e.g., 'America/New_York', 'Europe/London').
-
-    Used to customize the system prompt with timezone-aware instructions.
-    """
-
-
-class ExperimentalCustomToolkitTool(TypedDict, total=False):
-    description: Required[str]
-    """Used for BM25 search matching and shown to the LLM."""
-
-    input_schema: Required[Dict[str, Optional[object]]]
-    """Must have type: "object" and a properties field."""
-
-    name: Required[str]
-    """Human-readable display name"""
-
-    slug: Required[str]
-    """Tool slug.
-
-    Combined with toolkit slug to form LOCAL*<TOOLKIT>*<TOOL> (max 60 chars total).
-    """
-
-    output_schema: Dict[str, Optional[object]]
-    """Optional output schema for the tool response."""
-
-
-class ExperimentalCustomToolkit(TypedDict, total=False):
-    description: Required[str]
-    """Used for BM25 search matching and shown in toolkit connection statuses."""
-
-    name: Required[str]
-    """Display name shown to the LLM and in search results."""
-
-    slug: Required[str]
-    """Unique slug for the toolkit.
-
-    Must not conflict with existing Composio toolkit slugs. Alphanumeric,
-    underscores, and hyphens only.
-    """
-
-    tools: Required[Iterable[ExperimentalCustomToolkitTool]]
-    """Tools in this custom toolkit"""
-
-
-class ExperimentalCustomTool(TypedDict, total=False):
-    description: Required[str]
-    """Used for BM25 search matching and shown to the LLM."""
-
-    input_schema: Required[Dict[str, Optional[object]]]
-    """Must have type: "object" and a properties field."""
-
-    name: Required[str]
-    """Human-readable display name"""
-
-    slug: Required[str]
-    """Tool slug.
-
-    Forms LOCAL*<TOOL> (standalone) or LOCAL*<TOOLKIT>\\__<TOOL> (extending). Max 60
-    chars total.
-    """
-
-    extends_toolkit: str
-    """If set, must be a valid Composio toolkit slug.
-
-    The tool inherits that toolkit's auth/connection status. If omitted, the tool is
-    standalone (no-auth).
-    """
-
-    output_schema: Dict[str, Optional[object]]
-    """JSON Schema describing tool output (optional)"""
-
-
 class ExperimentalPermissions(TypedDict, total=False):
     """Per-tool elicitation permission config.
 
-    Default behavior + per-tool always_allow/always_deny overrides. Mutation via PATCH.
+    Replaces the stored block when provided.
     """
 
     default: Required[Literal["allow_all", "ask_every_call", "ask_once_per_session"]]
@@ -220,38 +124,14 @@ class ExperimentalPermissions(TypedDict, total=False):
 
 
 class Experimental(TypedDict, total=False):
-    """
-    Experimental features - not stable, may be modified or removed in future versions.
-    """
-
-    assistive_prompt_config: ExperimentalAssistivePromptConfig
-    """Customize assistive prompt generation (e.g., timezone)."""
-
-    custom_toolkits: Iterable[ExperimentalCustomToolkit]
-    """Custom toolkits with grouped tools.
-
-    Toolkit slugs must not conflict with existing Composio toolkits. All tools are
-    no-auth.
-    """
-
-    custom_tools: Iterable[ExperimentalCustomTool]
-    """Custom tools to include in search.
-
-    Standalone tools need no auth. Tools with extends_toolkit inherit the Composio
-    toolkit's connection.
-    """
-
     permissions: ExperimentalPermissions
     """Per-tool elicitation permission config.
 
-    Default behavior + per-tool always_allow/always_deny overrides. Mutation via
-    PATCH.
+    Replaces the stored block when provided.
     """
 
 
 class ManageConnections(TypedDict, total=False):
-    """Configuration for connection management settings"""
-
     callback_url: str
     """
     The URL to redirect to after a user completes authentication for a connected
@@ -281,11 +161,6 @@ class ManageConnections(TypedDict, total=False):
 
 
 class MultiAccount(TypedDict, total=False):
-    """Configure multi-account behavior.
-
-    When enabled, users can connect multiple accounts per toolkit.
-    """
-
     enable: bool
     """When true, enables multi-account mode for this session.
 
@@ -385,8 +260,6 @@ Tools: TypeAlias = Union[ToolsEnable, ToolsDisable, ToolsTags]
 
 
 class Workbench(TypedDict, total=False):
-    """Configuration for workbench behavior"""
-
     auto_offload_threshold: float
     """Character threshold for automatic offloading.
 
@@ -409,5 +282,6 @@ class Workbench(TypedDict, total=False):
     sandbox_size: Literal["standard", "medium", "large", "xlarge"]
     """
     Sandbox compute tier: standard (1 vCPU / 1 GB), medium (2 vCPU / 2 GB), large (4
-    vCPU / 4 GB), xlarge (8 vCPU / 8 GB). Defaults to standard.
+    vCPU / 4 GB), xlarge (8 vCPU / 8 GB). Patching this value recreates the sandbox
+    on next access — sandbox FS state is lost, but /mnt/files/ R2 mount persists.
     """
