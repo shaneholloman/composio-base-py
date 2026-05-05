@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.36.0 (2026-05-05)
+
+Full Changelog: [v1.35.0...v1.36.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.35.0...v1.36.0)
+
+### Features
+
+* **api:** api update ([2a1b1c4](https://github.com/ComposioHQ/composio-base-py/commit/2a1b1c472de35e19c07a8030f03f47c06bb0f4e1))
+* **api:** manual updates ([a179509](https://github.com/ComposioHQ/composio-base-py/commit/a179509535136ab94a38e533d04aaa2bd2c9c6bf))
+* **api:** v3.1 ([576348e](https://github.com/ComposioHQ/composio-base-py/commit/576348ee82c2eb7721a6cbc29955e06893754161))
+
+
+### Chores
+
+* **internal:** reformat pyproject.toml ([db99a07](https://github.com/ComposioHQ/composio-base-py/commit/db99a077160ea2f352b606e2aacbb3183e2ee0f6))
+
 ## 1.35.0 (2026-04-30)
 
 Full Changelog: [v1.34.0...v1.35.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.34.0...v1.35.0)
