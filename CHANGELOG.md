@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.38.0 (2026-05-11)
+
+Full Changelog: [v1.37.0...v1.38.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.37.0...v1.38.0)
+
+### Features
+
+* **api:** api update ([82a9edb](https://github.com/ComposioHQ/composio-base-py/commit/82a9edbf0f1dd7d672ba3a391a85f11a455256b9))
+* **api:** api update ([eb382ed](https://github.com/ComposioHQ/composio-base-py/commit/eb382ede96be0ade38229d1e3a97ebe78ce8658b))
+* **internal/types:** support eagerly validating pydantic iterators ([df79bad](https://github.com/ComposioHQ/composio-base-py/commit/df79bade85ce6b840273823fd83c184ff42d1f42))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([6d2dcd9](https://github.com/ComposioHQ/composio-base-py/commit/6d2dcd9cfb8be02b3d38af2f35029c8f11d6b37d))
+
 ## 1.37.0 (2026-05-06)
 
 Full Changelog: [v1.36.0...v1.37.0](https://github.com/ComposioHQ/composio-base-py/compare/v1.36.0...v1.37.0)
